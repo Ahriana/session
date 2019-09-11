@@ -164,6 +164,16 @@ function session(options) {
       req.session.cookie.secure = issecure(req, trustProxy);
     }
   };
+  // generates the new session
+  this.generate = function(req){
+    req.sessionID = generateId(req);
+    req.session = new Session(req);
+    req.session.cookie = new Cookie(cookieOptions);
+
+    if (cookieOptions.secure === 'auto') {
+      req.session.cookie.secure = issecure(req, trustProxy);
+    }
+  };
 
   var storeImplementsTouch = typeof store.touch === 'function';
 
