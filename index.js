@@ -355,13 +355,13 @@ function session(options) {
       return _end.call(res, chunk, encoding);
     };
 
-    // generate the session
-    function generate() {
-      store.generate(req);
-      originalId = req.sessionID;
-      originalHash = hash(req.session);
-      wrapmethods(req.session);
-    }
+    // // generate the session
+    // function generate() {
+    //   store.generate(req);
+    //   originalId = req.sessionID;
+    //   originalHash = hash(req.session);
+    //   wrapmethods(req.session);
+    // }
 
     // inflate the session
     function inflate (req, sess) {
@@ -464,7 +464,7 @@ function session(options) {
     // generate a session if the browser doesn't send a sessionID
     if (!req.sessionID) {
       debug('no SID sent, generating session');
-      generate();
+      // generate();
       next();
       return;
     }
@@ -482,7 +482,7 @@ function session(options) {
       try {
         if (err || !sess) {
           debug('no session found')
-          generate()
+          // generate()
         } else {
           debug('session found')
           inflate(req, sess)
